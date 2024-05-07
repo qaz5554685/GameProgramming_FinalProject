@@ -46,7 +46,7 @@ void setup(){
         squType[i]=1;
     }
   }
-  //squType[0]=9;
+  squType[0]=5;
 }
 
 
@@ -65,6 +65,8 @@ void draw(){
     for(int j=0;j<9;j++){
       if(array[i*9+j]==0)
         fill(#FFFFFF);
+      else if(array[i*9+j]==5)
+        fill(#28FF28);
       else
         fill(#FF0000);
       square(400+j*squSize,250+i*squSize,squSize);
@@ -282,7 +284,7 @@ void mousePressed(){
   
 }
 
-void two_mul_two(int x,int y,int size){ //type = 1
+void two_mul_two(int x,int y,int size){ //type = 2
   fill(#FF0000);
   square(x,y,size);
   square(x+size,y,size);
@@ -290,7 +292,7 @@ void two_mul_two(int x,int y,int size){ //type = 1
   square(x+size,y+size,size);
 }
 
-void three_mul_three(int x,int y,int size){//type=2
+void three_mul_three(int x,int y,int size){//type=3
   fill(#FF0000);
   square(x,y,size);
   square(x+size,y,size);
@@ -303,40 +305,40 @@ void three_mul_three(int x,int y,int size){//type=2
   square(x+size*2,y+size*2,size);
 }
 
-void three_plus_mid_one_left(int x,int y,int size){//type=3
+void three_plus_mid_one_left(int x,int y,int size){//type=4
 fill(#FF0000);
   square(x,y+size,size);
   square(x+size,y,size);
   square(x+size,y+size,size);
   square(x+size,y+size*2,size);
 }
-void three_plus_mid_one_right(int x,int y,int size){//type=4
-fill(#FF0000);
+void three_plus_mid_one_right(int x,int y,int size){//type=5
+fill(#28FF28);
   square(x,y,size);
   square(x,y+size,size);
   square(x,y+size*2,size);
   square(x+size,y+size,size);
 }
-void three_plus_mid_one_up(int x,int y,int size){//type=5
+void three_plus_mid_one_up(int x,int y,int size){//type=6
 fill(#FF0000);
   square(x+size,y,size);
   square(x,y+size,size);
   square(x+size*2,y+size,size);
   square(x+size,y+size,size);
 }
-void three_plus_mid_one_down(int x,int y,int size){//type=6
+void three_plus_mid_one_down(int x,int y,int size){//type=7
 fill(#FF0000);
   square(x,y,size);
   square(x+size,y+size,size);
   square(x+size*2,y,size);
   square(x+size,y,size);
 }
-void one_mul_two(int x,int y,int size){//type=7
+void one_mul_two(int x,int y,int size){//type=8
 fill(#FF0000);
   square(x,y,size);
   square(x,y+size,size);
 }
-void two_mul_one(int x,int y,int size){//type=8
+void two_mul_one(int x,int y,int size){//type=9
 fill(#FF0000);
   square(x,y,size);
   square(x+size,y,size);
