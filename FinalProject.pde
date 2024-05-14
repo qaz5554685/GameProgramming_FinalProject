@@ -18,7 +18,7 @@ void setup(){
   control = 0;
   squSize = 40;
   reset();
-  //squType[0]=17;
+  //squType[0]=22;
 }
 
 
@@ -96,6 +96,21 @@ void draw(){
     }
     else if(squType[i]==17){
       three_mul_two(squX[i],squY[i],squSize);
+    }
+    else if(squType[i]==18){
+       three_plus_right_one_left(squX[i],squY[i],squSize);
+    }
+    else if(squType[i]==19){
+       three_plus_right_one_right(squX[i],squY[i],squSize);
+    }
+    else if(squType[i]==20){
+       three_plus_right_one_up(squX[i],squY[i],squSize);
+    }
+    else if(squType[i]==21){
+       three_plus_right_one_down(squX[i],squY[i],squSize);
+    }
+    else if(squType[i]==22){
+      three_plus_right_two_left(squX[i],squY[i],squSize);
     }
   }
   
@@ -225,6 +240,42 @@ void draw(){
                array[(j+1)*9+k+1]=squType[i];
                array[(j+2)*9+k]=squType[i];
                array[(j+2)*9+k+1]=squType[i];
+             }
+             if(squType[i]==18&&j<=6&&k<=7&&array[j*9+k]==0&&array[j*9+k+1]==0&&array[(j+1)*9+k+1]==0&&array[(j+2)*9+k+1]==0){
+               check=1;
+               array[j*9+k]=squType[i];
+               array[j*9+k+1]=squType[i];
+               array[(j+1)*9+k+1]=squType[i];
+               array[(j+2)*9+k+1]=squType[i];
+             }
+             if(squType[i]==19&&j<=6&&k<=7&&array[j*9+k]==0&&array[(j+1)*9+k]==0&&array[(j+2)*9+k]==0&&array[(j+2)*9+k+1]==0){
+               check=1;
+               array[j*9+k]=squType[i];
+               array[(j+1)*9+k]=squType[i];
+               array[(j+2)*9+k]=squType[i];
+               array[(j+2)*9+k+1]=squType[i];
+             }
+             if(squType[i]==20&&j<=7&&k<=6&&array[j*9+k+2]==0&&array[(j+1)*9+k]==0&&array[(j+1)*9+k+1]==0&&array[(j+1)*9+k+2]==0){
+               check=1;
+               array[j*9+k+2]=squType[i];
+               array[(j+1)*9+k]=squType[i];
+               array[(j+1)*9+k+2]=squType[i];
+               array[(j+1)*9+k+1]=squType[i];
+             }
+             if(squType[i]==21&&j<=7&&k<=6&&array[j*9+k]==0&&array[(j)*9+k+1]==0&&array[(j)*9+k+2]==0&&array[(j+1)*9+k]==0){
+               check=1;
+               array[j*9+k]=squType[i];
+               array[(j)*9+k+1]=squType[i];
+               array[(j)*9+k+2]=squType[i];
+               array[(j+1)*9+k]=squType[i];
+             }
+             if(squType[i]==22&&j<=6&&k<=6&&array[j*9+k]==0&&array[(j)*9+k+1]==0&&array[(j)*9+k+2]==0&&array[(j+1)*9+k+2]==0&&array[(j+2)*9+k+2]==0){
+               check=1;
+               array[j*9+k]=squType[i];
+               array[(j)*9+k+1]=squType[i];
+               array[(j)*9+k+2]=squType[i];
+               array[(j+1)*9+k+2]=squType[i];
+               array[(j+2)*9+k+2]=squType[i];
              }
            }
          }
@@ -396,6 +447,46 @@ void mousePressed(){
           squCon[i] = 1;
      }
     }
+    else if(squType[i]==18){
+      if((mouseX>=squX[i]&&mouseX<=squX[i]+squSize&&mouseY>=squY[i]&&mouseY<=squY[i]+squSize)||(mouseX>=squX[i]+squSize&&mouseX<=squX[i]+squSize*2&&mouseY>=squY[i]&&mouseY<=squY[i]+squSize*3)){
+        if(squCon[i] == 1)
+          squCon[i] = 0;
+        else
+          squCon[i] = 1;
+     }
+    }
+    else if(squType[i]==19){
+      if((mouseX>=squX[i]&&mouseX<=squX[i]+squSize&&mouseY>=squY[i]&&mouseY<=squY[i]+squSize*3)||(mouseX>=squX[i]+squSize&&mouseX<=squX[i]+squSize*2&&mouseY>=squY[i]+squSize*2&&mouseY<=squY[i]+squSize*3)){
+        if(squCon[i] == 1)
+          squCon[i] = 0;
+        else
+          squCon[i] = 1;
+     }
+    }
+    else if(squType[i]==20){
+      if((mouseX>=squX[i]+squSize*2&&mouseX<=squX[i]+squSize*3&&mouseY>=squY[i]&&mouseY<=squY[i]+squSize)||(mouseX>=squX[i]+squSize&&mouseX<=squX[i]+squSize*3&&mouseY>=squY[i]+squSize&&mouseY<=squY[i]+squSize*2)){
+        if(squCon[i] == 1)
+          squCon[i] = 0;
+        else
+          squCon[i] = 1;
+     }
+    }
+    else if(squType[i]==21){
+      if((mouseX>=squX[i]&&mouseX<=squX[i]+squSize*3&&mouseY>=squY[i]&&mouseY<=squY[i]+squSize)||(mouseX>=squX[i]&&mouseX<=squX[i]+squSize&&mouseY>=squY[i]+squSize&&mouseY<=squY[i]+squSize*2)){
+        if(squCon[i] == 1)
+          squCon[i] = 0;
+        else
+          squCon[i] = 1;
+     }
+    }
+    else if(squType[i]==22){
+      if((mouseX>=squX[i]&&mouseX<=squX[i]+squSize*3&&mouseY>=squY[i]&&mouseY<=squY[i]+squSize)||(mouseX>=squX[i]+squSize*2&&mouseX<=squX[i]+squSize*3&&mouseY>=squY[i]+squSize&&mouseY<=squY[i]+squSize*3)){
+        if(squCon[i] == 1)
+          squCon[i] = 0;
+        else
+          squCon[i] = 1;
+     }
+    }
   } 
   
   
@@ -525,6 +616,44 @@ void three_mul_two(int x,int y,int size){//type=17
   square(x+size,y+size*2,size);
 }
 
+void three_plus_right_one_left(int x,int y,int size){//type=18
+fill(#FF0000);
+  square(x,y,size);
+  square(x+size,y,size);
+  square(x+size,y+size,size);
+  square(x+size,y+size*2,size);
+}
+
+void three_plus_right_one_right(int x,int y,int size){//type=19
+fill(#FF0000);
+  square(x,y,size);
+  square(x,y+size,size);
+  square(x,y+size*2,size);
+  square(x+size,y+size*2,size);
+}
+void three_plus_right_one_up(int x,int y,int size){//type=20
+fill(#FF0000);
+  square(x+size*2,y,size);
+  square(x,y+size,size);
+  square(x+size,y+size,size);
+  square(x+size*2,y+size,size);
+}
+void three_plus_right_one_down(int x,int y,int size){//type=21
+  fill(#FF0000);
+  square(x,y,size);
+  square(x+size,y,size);
+  square(x+size*2,y,size);
+  square(x,y+size,size);
+}
+void three_plus_right_two_left(int x,int y,int size){//type=22
+fill(#FF0000);
+  square(x,y,size);
+  square(x+size,y,size);
+  square(x+size*2,y,size);
+  square(x+size*2,y+size,size);
+  square(x+size*2,y+size*2,size);
+}
+
 void reset(){
   squX[0]=250;
   squX[1]=550;
@@ -536,8 +665,18 @@ void reset(){
     squCon[i] = 0;
 
   for(int i=0;i<3;i++){
-    tmp = random(1,18);
-    if(tmp>17)
+    tmp = random(1,23);
+    if(tmp>22)
+      squType[i]=22;
+    else if(tmp>21)
+      squType[i]=21;
+    else if(tmp>20)
+      squType[i]=20;
+    else if(tmp>19)
+      squType[i]=19;
+    else if(tmp>18)
+      squType[i]=18;
+    else if(tmp>17)
       squType[i]=17;
     else if(tmp>16)
       squType[i]=16;
