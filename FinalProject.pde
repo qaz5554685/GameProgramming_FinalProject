@@ -1,8 +1,10 @@
-int preX,preY,control,squSize,gameover,score;
+int preX,preY,control,squSize,gameover,score,question,Q_score,Current_Knowledge;
 float tmp;
 int[] squX=new int[3],squY=new int[3],squType=new int[3],squCon = new int[3],array = new int[81],checkclearArray = new int[81];
 PFont font;
 String str;
+
+int[] used = new int[50];
 
 String[] knowledge  = {"鱷魚通常是直立行走的！",
                        "绵羊能記住你们所有人的臉！",
@@ -56,9 +58,9 @@ String[] knowledge  = {"鱷魚通常是直立行走的！",
                        "巨石像摩艾在土裡是有完整穿褲子的下半身的"
  };
 
-
 void setup(){
-  score = 0;
+  Current_Knowledge = 0;
+  question = 0;
   gameover = 1;
   for(int i=0;i<81;i++){
     checkclearArray[i] = 0;
@@ -74,11 +76,23 @@ void setup(){
   smooth();
   font = createFont("Silver.ttf", 32);
   textFont(font);
-  //reset();
 }
 
 
 void draw(){
+  if(question==1){
+    fill(0,0,0);
+    background(#FFFFFF);
+    textSize(90);
+    text(knowledge[Current_Knowledge],100,100,700,500);
+    stroke(0,0,0);
+    strokeWeight(2);
+    DrawButton(300,600,300,100);
+    textSize(90);
+    text("我知道了!", 345, 670);
+    
+  }
+  else{
   if(gameover==0){
       background(#FFFFFF);
       str = "Score : " + score;
@@ -444,7 +458,16 @@ void draw(){
       if(squType[0]==0&&squType[2]==0&&squType[1]==0){
         reset();
       }
-      
+      if(Q_score>=50){
+        Q_score-=50;
+        int num = int(random(0,50));
+        while(used[num]!=0){
+          num = int(random(0,50));
+        }
+        used[num]=1;
+        Current_Knowledge = num;
+        question = 1;
+      }
       
       gameover = end_game();
       
@@ -461,9 +484,16 @@ void draw(){
     DrawButton(300,600,300,100);
     text("Quit", 390, 670);
   }
+  }
 }
 
 void mousePressed(){
+  if(question == 1){
+    if(mouseX>=300&&mouseX<=600&&mouseY>=600&&mouseY<=700){
+      question=0;
+    }
+  }
+  else{
   if(gameover==0){
     for(int i=0;i<3;i++){
       if(squType[i]==1){
@@ -705,7 +735,11 @@ void mousePressed(){
       if(mouseX>=300&&mouseX<=600&&mouseY>=450&&mouseY<=550){
         startGame();
       }
+      else if(mouseX>=300&&mouseX<=600&&mouseY>=600&&mouseY<=700){
+        exit();
+      }
     }
+  }
   } 
   
   
@@ -1029,6 +1063,7 @@ void clear(){
   for(int i=0;i<81;i++){
     if(checkclearArray[i]==1){
       score+=1;
+      Q_score+=1;
       checkclearArray[i]=0;
       array[i]=0;
     }
@@ -1195,6 +1230,7 @@ void DrawButton(int x,int y,int x_size,int y_size){
 }
 
 void startGame(){
+  question = 0;
   gameover=0;
   reset();
   for(int i=0;i<81;i++){
@@ -1202,6 +1238,10 @@ void startGame(){
     array[i] = 0;
   }
   score=0;
+  Q_score=0;
+  for(int i=0;i<50;i++){
+     used[i] = 0;
+   }
 }
 //yellow FFFF37
 //light_blue 00FFFF
